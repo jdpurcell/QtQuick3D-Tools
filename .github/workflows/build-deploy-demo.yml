@@ -46,7 +46,7 @@ jobs:
           set-env: 'true'
           dir: ${{ env.workspace_root }}
           modules: ${{ env.qt_modules }}
-          aqtsource: 'git+https://github.com/miurahr/aqtinstall.git@master'
+          aqtsource: 'git+https://github.com/miurahr/aqtinstall.git'
           extra: '--autodesktop'
 
       - name: Verify Qt Installation
