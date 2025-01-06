@@ -37,7 +37,7 @@ jobs:
         uses: seanmiddleditch/gha-setup-ninja@v5
 
       - name: Install Qt for host architecture
-        uses: Kidev/install-qt-action@v4.2.0
+        uses: Kidev/install-qt-action@v4.2.1
         with:
           version: ${{ env.qt_version }}
           host: 'all_os'
@@ -46,8 +46,6 @@ jobs:
           set-env: 'true'
           dir: ${{ env.workspace_root }}
           modules: ${{ env.qt_modules }}
-          aqtsource: 'git+https://github.com/miurahr/aqtinstall.git'
-          extra: '--autodesktop'
 
       - name: Verify Qt Installation
         shell: bash
