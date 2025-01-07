@@ -36,17 +36,6 @@ jobs:
       - name: Install ninja-build tool
         uses: seanmiddleditch/gha-setup-ninja@v5
 
-      - name: Install Qt for host architecture
-        uses: Kidev/install-qt-action@v4.3.0
-        with:
-          version: ${{ env.qt_version }}
-          host: 'all_os'
-          target: 'wasm'
-          arch: 'wasm_singlethread'
-          set-env: 'true'
-          dir: ${{ env.workspace_root }}
-          modules: ${{ env.qt_modules }}
-
       - name: Install Qt
         uses: Kidev/install-qt-action@v4.3.0
         with:
