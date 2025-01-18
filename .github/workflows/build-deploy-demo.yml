@@ -46,6 +46,7 @@ jobs:
           use-commercial: true
           user: ${{ secrets.QT_USERNAME }}
           password: ${{ secrets.QT_PASSWORD }}
+          modules: "${{ env.qt_target_arch }} ${{ env.qt_modules }}"
 
       - name: Verify Qt Installation
         shell: bash
