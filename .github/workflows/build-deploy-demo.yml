@@ -17,8 +17,6 @@ jobs:
       qt_root_folder: '/home/runner/work/QtQuick3D-Tools/QtQuick3D-Tools'
       target_folder: 'QtQuick3D-Tools'
       source_folder: '/home/runner/work/QtQuick3D-Tools/QtQuick3D-Tools/build/example'
-      DISPLAY: ':99.0'
-      XDG_RUNTIME_DIR: '/tmp/runtime-runner'
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
@@ -31,18 +29,7 @@ jobs:
       - name: Install tools
         shell: bash
         run: |
-          sudo apt-get -y install jq lftp brotli expect xvfb
-          Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
-          echo "DISPLAY=:99.0" >> $GITHUB_ENV
-          sleep 3
-          sudo mkdir -p /home/runner/.local/share/aqt
-          sudo mkdir -p /home/runner/.local/share/Qt
-          sudo chown -R runner:runner /home/runner/.local/share/aqt
-          sudo chown -R runner:runner /home/runner/.local/share/Qt
-          sudo chmod -R 755 /home/runner/.local/share/aqt
-          sudo chmod -R 755 /home/runner/.local/share/Qt
-          mkdir -p $XDG_RUNTIME_DIR
-          chmod 700 $XDG_RUNTIME_DIR
+          sudo apt-get -y install jq lftp brotli expect
 
       - name: Update CMake
         uses: lukka/get-cmake@latest
@@ -62,14 +49,6 @@ jobs:
           password: ${{ secrets.QT_PASSWORD }}
           modules: ${{ env.qt_modules }}
           dir: ${{ env.qt_root_folder }}
-
-      - name: Verify Qt Installation
-        shell: bash
-        run: |
-          ls -la ${{ env.qt_root }}/${{ env.qt_version }}/${{ env.qt_host_arch }}/lib
-          ls -la ${{ env.qt_root }}/${{ env.qt_version }}/${{ env.qt_target_arch }}/lib
-          ls -la ${{ env.qt_root }}/${{ env.qt_version }}/${{ env.qt_host_arch }}/lib/cmake
-          ls -la ${{ env.qt_root }}/${{ env.qt_version }}/${{ env.qt_target_arch }}/lib/cmake
           
       - name: CMake Build
         shell: bash
