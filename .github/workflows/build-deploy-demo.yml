@@ -12,7 +12,7 @@ jobs:
       qt_version: '6.8.1'
       qt_host_arch: 'gcc_64'
       qt_target_arch: 'wasm_singlethread'
-      qt_modules: 'qtquick3d qtshadertools'
+      qt_modules: 'qtquick3d qtshadertools wasm_singlethread'
       qt_root: '/home/runner/work/QtQuick3D-Tools/QtQuick3D-Tools/Qt'
       target_folder: 'QtQuick3D-Tools'
       source_folder: '/home/runner/work/QtQuick3D-Tools/QtQuick3D-Tools/build/example'
@@ -46,7 +46,7 @@ jobs:
           use-commercial: true
           user: ${{ secrets.QT_USERNAME }}
           password: ${{ secrets.QT_PASSWORD }}
-          modules: "${{ env.qt_target_arch }} ${{ env.qt_modules }}"
+          modules: ${{ env.qt_modules }}
 
       - name: Verify Qt Installation
         shell: bash
