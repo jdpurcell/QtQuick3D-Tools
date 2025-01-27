@@ -16,6 +16,7 @@ jobs:
       qt_root: '/home/runner/work/QtQuick3D-Tools/QtQuick3D-Tools/Qt'
       target_folder: 'QtQuick3D-Tools'
       source_folder: '/home/runner/work/QtQuick3D-Tools/QtQuick3D-Tools/build/example'
+      DISPLAY: ':99.0'
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
@@ -28,7 +29,11 @@ jobs:
       - name: Install tools
         shell: bash
         run: |
-          sudo apt-get -y install jq lftp brotli expect
+          sudo apt-get -y install jq lftp brotli expect xvfb
+          Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+          echo "DISPLAY=:99.0" >> $GITHUB_ENV
+          sudo mkdir -p /home/runner/.local/share/Qt
+          sudo chown -R runner:runner /home/runner/.local/share/Qt
 
       - name: Update CMake
         uses: lukka/get-cmake@latest
