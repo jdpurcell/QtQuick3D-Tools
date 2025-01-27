@@ -55,11 +55,12 @@ jobs:
           version: '6.8.1'
           target: 'desktop'
           arch: 'linux_gcc_64'
-          aqtsource: 'git+https://github.com/Kidev/aqtinstall.git@test_install_qt_commercial'
+          aqtsource: 'git+https://github.com/Kidev/aqtinstall.git@install_qt_commercial'
           use-commercial: true
           user: ${{ secrets.QT_USERNAME }}
           password: ${{ secrets.QT_PASSWORD }}
           modules: ${{ env.qt_modules }}
+          dir: ${{ env.qt_root }}
 
       - name: Verify Qt Installation
         shell: bash
