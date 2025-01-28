@@ -48,6 +48,7 @@ jobs:
           password: ${{ secrets.QT_PASSWORD }}
           modules: ${{ env.qt_modules }}
           dir: ${{ env.qt_root_folder }}
+          aqtsource: 'git+https://github.com/miurahr/aqtinstall'
           
       - name: CMake Build
         shell: bash
