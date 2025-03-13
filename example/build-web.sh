@@ -1,9 +1,6 @@
 #!/bin/bash
 
-QT_ROOT=$1
-QT_VERSION=$2
-QT_HOST_ARCH=$3
-QT_TARGET_ARCH=$4
+QT_VERSION=$1
 EMSDK_VERSION=""
 
 case "$QT_VERSION" in
@@ -21,11 +18,7 @@ case "$QT_VERSION" in
 esac
 
 QT_VERSION_NAME="Qt${QT_VERSION:0:1}"
-QT_ROOT_TARGET="${QT_ROOT}/${QT_VERSION}/${QT_TARGET_ARCH}"
-QT_HOST_PATH="${QT_ROOT}/${QT_VERSION}/${QT_HOST_ARCH}"
-QT_HOST_CMAKE_DIR="${QT_HOST_PATH}/lib/cmake"
-QT_MODULE_PATH="${QT_ROOT_TARGET}/lib/cmake/${QT_VERSION_NAME}"
-QT_TOOLCHAIN="${QT_ROOT_TARGET}/lib/cmake/${QT_VERSION_NAME}/qt.toolchain.cmake"
+QT_TOOLCHAIN="${QT_ROOT_DIR}/lib/cmake/${QT_VERSION_NAME}/qt.toolchain.cmake"
 
 if [ ! -d "emsdk" ]; then
     git clone https://github.com/emscripten-core/emsdk.git
@@ -44,11 +37,8 @@ fi
 
 mkdir -p build
 ./emsdk/upstream/emscripten/emcmake cmake -G Ninja -S . -B build \
-  -DQT_HOST_PATH=${QT_HOST_PATH} \
-  -DQT_HOST_PATH_CMAKE_DIR=${QT_HOST_CMAKE_DIR} \
-  -DQt6_DIR=${QT_MODULE_PATH} \
   -DCMAKE_TOOLCHAIN_FILE=${QT_TOOLCHAIN} \
-  -DCMAKE_PREFIX_PATH=${QT_ROOT_TARGET} \
+  -DCMAKE_PREFIX_PATH=${QT_ROOT_DIR} \
   -DEMSCRIPTEN=ON \
   -DCMAKE_BUILD_TYPE=MinSizeRel \
   -DBUILD_EXAMPLE=ON

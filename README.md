@@ -278,25 +278,6 @@ Window {
 
 For more advanced uses, tricks, and deploys, you can check [the code of the demo here](https://github.com/Kidev/QtQuick3D-Tools/tree/main/example)
 
-### Building the demo
-This works on Linux, Windows and macOS for the architectures `gcc_64`, `clang_64`, `win64_msvc2019_64`, `win64_mingw`, `wasm_singlethread`, `wasm_multithread`. All the arm64 architectures are untested, but it may work.  
-
-- For desktop:
-  - Install Qt for your architecture, for example `gcc_64`.  
-  - Set `QT_ROOT`, `QT_VERSION`, `QT_ARCH` to the appropriate values for your Qt installation and run: \
-    `make desktop QT_ROOT="/opt/Qt" QT_VERSION="6.6.3" QT_ARCH="gcc_64"`  
-- For the web:
-  - Install Qt for your host and target architectures, for example `gcc_64` AND `wasm_singlethread`.  
-  - Enable the following headers (COOP and COEP) on your server:  
-    ```
-    Cross-Origin-Opener-Policy: same-origin
-    Cross-Origin-Embedder-Policy: require-corp
-    ```
-  - Set `QT_ROOT`, `QT_VERSION`, `QT_HOST_ARCH` and `QT_TARGET_ARCH` to the appropriate values for your Qt installation and run: \
-    `make web QT_ROOT="/opt/Qt" QT_VERSION="6.6.3" QT_HOST_ARCH="gcc_64" QT_TARGET_ARCH="wasm_singlethread"`
-- You can use `make run` / `make run-web` to run the desktop version / to run the web version in your favorite browser.
-- If you use QtCreator, you may get the error `You need to set an executable in the custom run configuration`. To fix it, simply go to `Projects` on the left, select your kit, click on `Current Configuration` and make sure the option `BUILD_EXAMPLE` is ticked ON.
-
 ## Credits
 - [aaravanimates](https://free3d.com/user/aaravanimates) for the [human 3D model](https://free3d.com/3d-model/rigged-male-human-442626.html) of the example (Personal Use License)
 - [Roundicons](https://www.flaticon.com/authors/roundicons) for the [move icon](https://www.flaticon.com/free-icons/move) of the example (Flaticon License)
