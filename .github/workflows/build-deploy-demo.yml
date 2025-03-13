@@ -1,8 +1,6 @@
 name: Build and deploy demo
 
-on: 
-  push:
-    branches: "main"
+on: [push, pull_request, workflow_dispatch]
 
 jobs:
   build-and-deploy:
@@ -12,7 +10,7 @@ jobs:
       qt_version: '6.8.1'
       qt_host_arch: 'gcc_64'
       qt_target_arch: 'wasm_singlethread'
-      qt_modules: 'qtquick3d qtshadertools wasm_singlethread'
+      qt_modules: 'qtquick3d qtshadertools'
       qt_root: '/home/runner/work/QtQuick3D-Tools/QtQuick3D-Tools/Qt'
       qt_root_folder: '/home/runner/work/QtQuick3D-Tools/QtQuick3D-Tools'
       target_folder: 'QtQuick3D-Tools'
@@ -29,7 +27,7 @@ jobs:
       - name: Install tools
         shell: bash
         run: |
-          sudo apt-get -y install jq lftp brotli expect
+          sudo apt-get -y install brotli
 
       - name: Update CMake
         uses: lukka/get-cmake@latest
@@ -38,17 +36,14 @@ jobs:
         uses: seanmiddleditch/gha-setup-ninja@v5
 
       - name: Install Qt
-        uses: Kidev/install-qt-action@v4.4.2
+        uses: jdpurcell/install-qt-action@v5
         with:
           version: '6.8.1'
-          target: 'desktop'
-          arch: 'linux_gcc_64'
-          use-commercial: true
-          user: ${{ secrets.QT_USERNAME }}
-          password: ${{ secrets.QT_PASSWORD }}
+          target: 'wasm'
+          arch: 'wasm_singlethread'
           modules: ${{ env.qt_modules }}
           dir: ${{ env.qt_root_folder }}
-          
+
       - name: CMake Build
         shell: bash
         run: |
@@ -58,11 +53,8 @@ jobs:
             QT_HOST_ARCH=${{ env.qt_host_arch }} \
             QT_TARGET_ARCH=${{ env.qt_target_arch }}
 
-      - name: Upload to FTP
-        shell: bash
-        run: |
-          lftp -u "${{ secrets.FTP_UPLOAD_USER }}","${{ secrets.FTP_UPLOAD_PW }}" ${{ secrets.FTP_UPLOAD_IP }} <<EOF
-          set ssl:verify-certificate no
-          mirror -R --only-newer --verbose ${{ env.source_folder }} ${{ env.target_folder }}
-          quit
-          EOF
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: QtQuick3D-Tools
+          path: ${{ env.source_folder }}
