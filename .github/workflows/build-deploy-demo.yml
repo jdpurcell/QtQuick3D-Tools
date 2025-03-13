@@ -43,6 +43,8 @@ jobs:
           arch: 'wasm_singlethread'
           modules: ${{ env.qt_modules }}
           dir: ${{ env.qt_root_folder }}
+          use-naqt: true
+          setup-python: false
 
       - name: CMake Build
         shell: bash
