@@ -8,7 +8,7 @@ jobs:
     env:
       workspace_root: '/home/runner/work/QtQuick3D-Tools/QtQuick3D-Tools'
       qt_root_folder: '/home/runner/work/QtQuick3D-Tools/QtQuick3D-Tools'
-      qt_version: '6.8.1'
+      qt_version: '6.5.3'
       qt_target_arch: 'wasm_singlethread'
       target_folder: 'QtQuick3D-Tools'
       source_folder: '/home/runner/work/QtQuick3D-Tools/QtQuick3D-Tools/build/example'
