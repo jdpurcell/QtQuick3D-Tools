@@ -39,6 +39,7 @@ jobs:
         uses: Kidev/install-qt-action@v4.4.6
         with:
           version: '6.8.1'
+          host: 'all_os'
           target: 'wasm'
           arch: 'wasm_singlethread'
           use-official: false
