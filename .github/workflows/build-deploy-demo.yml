@@ -1,8 +1,6 @@
 name: Build and deploy demo
 
-on: 
-  push:
-    branches: "main"
+on: [push, workflow_dispatch]
  
 jobs: 
   build-and-deploy:
@@ -41,8 +39,8 @@ jobs:
         uses: Kidev/install-qt-action@v4.4.6
         with:
           version: '6.8.1'
-          target: 'desktop'
-          arch: 'linux_gcc_64'
+          target: 'wasm'
+          arch: 'wasm_singlethread'
           use-official: false
           email: ${{ secrets.QT_USERNAME2 }}
           pw: ${{ secrets.QT_PASSWORD2 }}
