@@ -3,6 +3,7 @@
 QT_VERSION=$1
 EMSDK_VERSION=""
 
+# See QT_EMCC_RECOMMENDED_VERSION in https://github.com/qt/qtbase/blob/6.10.0/cmake/QtPublicWasmToolchainHelpers.cmake
 case "$QT_VERSION" in
     6.2*) EMSDK_VERSION="2.0.14" ;;
     6.3*) EMSDK_VERSION="3.0.0" ;;
@@ -11,6 +12,8 @@ case "$QT_VERSION" in
     6.6*) EMSDK_VERSION="3.1.37" ;;
     6.7*) EMSDK_VERSION="3.1.50" ;;
     6.8*) EMSDK_VERSION="3.1.56" ;;
+    6.9*) EMSDK_VERSION="3.1.70" ;;
+    6.10*) EMSDK_VERSION="4.0.7" ;;
     *)
         echo "Unsupported Qt version: $QT_VERSION"
         exit 1
