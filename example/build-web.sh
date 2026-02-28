@@ -11,6 +11,9 @@ case "$QT_VERSION" in
     6.6*) EMSDK_VERSION="3.1.37" ;;
     6.7*) EMSDK_VERSION="3.1.50" ;;
     6.8*) EMSDK_VERSION="3.1.56" ;;
+    6.9*) EMSDK_VERSION="3.1.70" ;;
+    6.10*) EMSDK_VERSION="4.0.7" ;;
+    6.11*) EMSDK_VERSION="4.0.7" ;;
     *)
         echo "Unsupported Qt version: $QT_VERSION"
         exit 1
